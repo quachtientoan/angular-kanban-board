@@ -67,7 +67,8 @@
           },
           "configurations": {
             "production": {
-              "browserTarget": "angular-kanban-board:build:production"
+              "browserTarget": "angular-kanban-board:build:production",
+              "publicHost":"http://localhost:4200"
             }
           }
         },

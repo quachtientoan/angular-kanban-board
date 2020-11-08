@@ -1,0 +1,23 @@
+.mat-card{
+  width: 20%; background-color: aliceblue;
+}
+
+.mat-card-header{
+  justify-content: space-between;
+}
+
+.mat{
+  display:flex; flex-direction: row; justify-content: space-between;
+}
+
+.mat-raised-button{
+  float: right;margin-top: 10px;
+}
+
+.div-mat-content{
+  border-style: groove
+}
+
+.delete-button{
+  color: pink;
+}
