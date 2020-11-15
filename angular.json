@@ -68,7 +68,7 @@
           "configurations": {
             "production": {
               "browserTarget": "angular-kanban-board:build:production",
-              "publicHost":"http://localhost:4200"
+              "publicHost": "http://localhost:4200"
             }
           }
         },
@@ -120,6 +120,10 @@
               "devServerTarget": "angular-kanban-board:serve:production"
             }
           }
+        },
+        "deploy": {
+          "builder": "angular-cli-ghpages:deploy",
+          "options": {}
         }
       }
     }

@@ -1,129 +1,41 @@
-<div style="height: 50px;">
-    <div class="mat">
-        <mat-card class="mat-card">
-            <mat-card-header class="mat-card-header">
-                <mat-card-title> TODO(3) </mat-card-title>
-                <mat-icon class="delete-button">delete</mat-icon>
-            </mat-card-header>
-            <mat-card-content>
+<section class="task-list" cdkDropListGroup>
+  <div class="simple-card" *ngFor="let item of board ; let indexColumn = index" >
+    <mat-card >
+        <div class="title-card">
+          <mat-card-title>{{ item.name}} ({{item.count}})</mat-card-title>
+          <button mat-icon-button (click)="removeColumn(indexColumn)"><mat-icon style="color: #f99e98">delete</mat-icon></button>
+        </div>
+        <div
+          cdkDropList
+          [cdkDropListData]="item.task"
+          class="example-list"
+          (cdkDropListDropped)="drop($event)"
+        >
+          <div class="example-box" *ngFor="let column of item.task; ; let indexItem = index" cdkDrag>
+            {{ column }}
+            <button mat-icon-button (click)=" removeItem(indexItem,indexColumn)" ><mat-icon style="color: #f99e98">delete</mat-icon></button>
+          </div>
+        </div>
+        <div class="input-add">
+          <mat-form-field class="example-full-width">
+            <input #itemAdd matInput  placeholder="New Job" (keydown.enter)="addJob(itemAdd,item.name)" />
+          </mat-form-field>
 
-            <div
-            cdkDropList
-            #todoList="cdkDropList"
-            [cdkDropListData]="todo"
-            [cdkDropListConnectedTo]="[doingList]"
-            class="example-list"
-            (cdkDropListDropped)="drop($event)">
-                <div class="div-mat-content" *ngFor="let item of todo" cdkDrag> 
-                    {{item}}
-                </div>
-            
-            </div>
-                
-                <div class="row">
-                    <mat-form-field class="example-full-width">
-                        <input matInput placeholder="New Job">
-                    </mat-form-field>
-                    <button mat-raised-button color="primary" class="mat-raised-button">Add</button>
-                </div>
+          <button mat-raised-button color="primary" (click)="addJob(itemAdd,item.name)">Add</button>
+        </div>
 
-            </mat-card-content>
-        </mat-card>
-        <mat-card class="mat-card">
-            <mat-card-header class="mat-card-header">
-                <mat-card-title> DOING(1) </mat-card-title>
-                <mat-icon class="delete-button">delete</mat-icon>
-            </mat-card-header>
-            <mat-card-content>
-                <div
-                cdkDropList
-                #doingList="cdkDropList"
-                [cdkDropListData]="doing"
-                [cdkDropListConnectedTo]="[doneList,todoList]"
-                class="example-list"
-                (cdkDropListDropped)="drop($event)">
-                <div class="div-mat-content" *ngFor="let item of doing" cdkDrag> 
-                    {{item}}
-                </div>
-                </div>
-                <div class="row">
-                    <mat-form-field class="example-full-width">
-                        <input matInput placeholder="New Job">
-                    </mat-form-field>
-                    <button mat-raised-button color="primary" class="mat-raised-button">Add</button>
-                </div>
+    </mat-card>
+  </div>
+  <div class="simple-card">
+    <div class="input-add">
+      <mat-form-field class="example-full-width">
+        <input #inputColumn matInput placeholder="New List" (keydown.enter)="addColumn(inputColumn)" />
+      </mat-form-field>
 
-            </mat-card-content>
-        </mat-card>
-        <mat-card class="mat-card">
-            <mat-card-header class="mat-card-header">
-                <mat-card-title> DONE (7) </mat-card-title>
-                <mat-icon class="delete-button">delete</mat-icon>
-            </mat-card-header>
-            <mat-card-content>
-                <div
-                cdkDropList
-                #doneList="cdkDropList"
-                [cdkDropListData]="done"
-                [cdkDropListConnectedTo]="[doingList,todoList]"
-                class="example-list"
-                (cdkDropListDropped)="drop($event)">
-                <div class="div-mat-content" *ngFor="let item of done" cdkDrag> 
-                    {{item}}
-                </div>
-            </div>
-               
-                <div class="row">
-                    <mat-form-field class="example-full-width">
-                        <input matInput placeholder="New Job">
-                    </mat-form-field>
-                    <button mat-raised-button color="primary" class="mat-raised-button">Add</button>
-                </div>
-
-            </mat-card-content>
-        </mat-card>
-        <mat-card class="mat-card">
-            <mat-card-header>
-                <mat-card-title> </mat-card-title>
-            </mat-card-header>
-            <mat-card-content>
-                <div class="row">
-                    <mat-form-field class="example-full-width">
-                        <input matInput placeholder="New Job">
-                    </mat-form-field>
-                    <button mat-raised-button color="primary" class="mat-raised-button">
-                        <mat-icon>add</mat-icon>Add
-                    </button>
-                </div>
-            </mat-card-content>
-        </mat-card>
+      <button (click)="addColumn(inputColumn)"  mat-raised-button color="primary" style="background-color: #374eae">
+        <mat-icon>add</mat-icon> Add
+      </button>
     </div>
-</div>
 
-<!-- <div class="example-container">
-  <h2>To do</h2>
-
-  <div
-    cdkDropList
-    #todoList="cdkDropList"
-    [cdkDropListData]="todo"
-    [cdkDropListConnectedTo]="[doneList]"
-    class="example-list"
-    (cdkDropListDropped)="drop($event)">
-    <div class="example-box" *ngFor="let item of todo" cdkDrag>{{item}}</div>
   </div>
-</div>
-
-<div class="example-container">
-  <h2>Done</h2>
-
-  <div
-    cdkDropList
-    #doneList="cdkDropList"
-    [cdkDropListData]="done"
-    [cdkDropListConnectedTo]="[todoList]"
-    class="example-list"
-    (cdkDropListDropped)="drop($event)">
-    <div class="example-box" *ngFor="let item of done" cdkDrag>{{item}}</div>
-  </div>
-</div> -->
+</section>

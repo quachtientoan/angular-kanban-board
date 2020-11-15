@@ -1,0 +1,12 @@
+<h1 mat-dialog-title style="color: blue;">
+  {{title}}
+</h1>
+
+<div mat-dialog-content >
+  <p>{{message}}</p>
+</div>
+
+<div mat-dialog-actions style="width: 300px; display: flex; justify-content: flex-end ;">
+  <button mat-button color="warn" (click)="onDismiss()">No</button>
+  <button mat-button color="primary" (click)="onConfirm()">Yes</button>
+</div>
